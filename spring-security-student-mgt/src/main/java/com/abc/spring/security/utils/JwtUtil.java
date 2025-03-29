@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class JwtUtil {
+    //openssl rand -base64 256 (git bash)
     private final String SECRET_KEY = "k7Sa+LTeMwbP+m9djgPOfdEDnKnrPZdjM+n1Gt1QfxFIZqzz0A3cMsB08FhP+3r5WHr7kvtF1Vcd1WB7aEorm7sfIexTGndTatO7UYXspMwpbTYPJ/UJqdXvUDUQUmdpSESkY1iAmy/qzd+pNyTrLwmoGao4f/kJZRTqosyVEi8csZlW3mMe/F2zXT1/yfmQmo1myiHGQWk5vd/G2wPXbKLK/q9JcaodKKRDsgMXsmwjKddIRfxzO56Ehx6ga9OhSOi1HJRVm1cLAgGZhQNH9vuug//w4B6s46r23U2D5zLwBroa31FOCAId1nDNFdpuMh7Jo2sKZ+z2LnNr7XAhDg==";
 
     public Key getSigningKey() {
