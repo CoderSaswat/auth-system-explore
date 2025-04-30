@@ -1,0 +1,94 @@
+ 1. What is Multithreading?
+Multithreading is the ability to run multiple threads (lightweight subprocesses) concurrently. It's used to improve the performance of programs that can do multiple tasks simultaneously (e.g., handling web requests, reading/writing files, etc.).
+
+🔹 2. ExecutorService
+ExecutorService is a higher-level replacement for creating and managing threads manually.
+
+✅ Why use it?
+Avoid creating threads manually
+
+Reuse threads from a pool
+
+Better control over thread lifecycle
+
+🧠 Example:
+java
+Copy
+Edit
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class ExecutorExample {
+    public static void main(String[] args) {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+
+        executor.submit(() -> {
+            System.out.println("Running in thread: " + Thread.currentThread().getName());
+        });
+
+        executor.shutdown();
+    }
+}
+🔹 3. Thread Pool
+A Thread Pool is a group of pre-instantiated reusable threads.
+
+✅ Why use Thread Pools?
+Efficient resource utilization
+
+Avoid overhead of creating threads repeatedly
+
+🧠 Example using FixedThreadPool:
+java
+Copy
+Edit
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class ThreadPoolExample {
+    public static void main(String[] args) {
+        ExecutorService pool = Executors.newFixedThreadPool(3);
+
+        for (int i = 1; i <= 5; i++) {
+            final int taskId = i;
+            pool.submit(() -> {
+                System.out.println("Task " + taskId + " running in: " + Thread.currentThread().getName());
+            });
+        }
+
+        pool.shutdown();
+    }
+}
+🔹 4. CompletableFuture
+CompletableFuture is a part of Java 8. It allows writing asynchronous, non-blocking code and chaining multiple async tasks.
+
+✅ Why use it?
+Avoids callback hell
+
+Allows better exception handling
+
+Enables parallel execution
+
+🧠 Example:
+java
+Copy
+Edit
+import java.util.concurrent.CompletableFuture;
+
+public class CompletableFutureExample {
+    public static void main(String[] args) {
+        CompletableFuture.supplyAsync(() -> {
+            System.out.println("Fetching data from DB...");
+            return "Data";
+        }).thenApply(data -> {
+            System.out.println("Processing data...");
+            return data.toUpperCase();
+        }).thenAccept(result -> {
+            System.out.println("Result: " + result);
+        });
+    }
+}
+🧠 Summary Table
+Concept	Purpose	Key Classes
+ExecutorService	Manage thread execution	Executors, ExecutorService
+Thread Pool	Reuse fixed number of threads	Executors.newFixedThreadPool
+CompletableFuture	Async, non-blocking computation	CompletableFuture
